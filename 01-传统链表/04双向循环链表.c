@@ -96,7 +96,7 @@ void InsertDCirLinkList(DCirLinkList* list,int pos,void* data)
 void RemoveByPosDCirLinkList(DCirLinkList* list,int pos)
 {
     //判断参数是否合法
-    if(list == NULL || pos >= list->size || pos < -(list->size))
+    if(list == NULL ||(list->size == 0) || pos >= list->size || pos < -(list->size))
         return ;
     
     if(pos<0)
@@ -120,7 +120,7 @@ void RemoveByPosDCirLinkList(DCirLinkList* list,int pos)
 void RemoveByValDCirLinkList(DCirLinkList* list,void* data)
 {
     //判断参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0))
         return ;
   
     //遍历节点
@@ -145,7 +145,7 @@ void RemoveByValDCirLinkList(DCirLinkList* list,void* data)
 void ChangeByPosDCirLinkList(DCirLinkList* list,int pos,void* data)
 {
     //判断参数是否合法
-    if(list == NULL || pos >= list->size || pos < -(list->size))
+    if(list == NULL ||(list->size == 0)  || pos >= list->size || pos < -(list->size))
         return ;
 
     if(pos<0)
@@ -165,7 +165,7 @@ void ChangeByPosDCirLinkList(DCirLinkList* list,int pos,void* data)
 void ChangeByValDCirLinkList(DCirLinkList* list,void* srcdata,void* dstdata)
 {
     //判断参数是否合法
-    if(list == NULL)
+    if(list == NULL ||(list->size == 0))
         return ;
 
     //遍历列表
@@ -185,7 +185,7 @@ void ChangeByValDCirLinkList(DCirLinkList* list,void* srcdata,void* dstdata)
 void* GetItemDCirLinkList(DCirLinkList* list,int pos)
 {
     //判断参数是否合法
-    if(list == NULL || pos >= list->size || pos < -(list->size))
+    if(list == NULL ||(list->size == 0) || pos >= list->size || pos < -(list->size))
         return (void*)-1;
     
     if(pos<0)
@@ -204,7 +204,7 @@ void* GetItemDCirLinkList(DCirLinkList* list,int pos)
 int FindByValDCirLinkList(DCirLinkList* list,void* data)
 {
     //判断参数是否合法
-    if(list == NULL)
+    if(list == NULL ||(list->size == 0))
         return -1;
 
     //遍历列表，寻找数据相等的节点
@@ -226,7 +226,7 @@ typedef void(*FUNC)(void*);
 void TraverseDCirLinkList(DCirLinkList* list,FUNC func)
 {
     //判断参数是否合法
-    if(list == NULL)
+    if(list == NULL ||(list->size == 0))
         return ;
 
     //为每一个节点的数据执行func函数
@@ -242,7 +242,7 @@ void TraverseDCirLinkList(DCirLinkList* list,FUNC func)
 void ClockTraverseDCirLinkList(DCirLinkList* list,FUNC func)
 {
     //判断传入的参数是否合法
-    if(list == NULL)
+    if(list == NULL ||(list->size == 0))
         return ;
 
     //为每一个节点的数据执行func函数
@@ -290,8 +290,11 @@ typedef struct STUDENT
 
 void PrintStudent(void*data)
 {
-    Student* p = (Student*)data;
-    printf("Name = %s,Age = %d,Score = %d\n",p->name,p->age,p->score);
+	if(data != NULL)
+	{
+    	Student* p = (Student*)data;
+    	printf("Name = %s,Age = %d,Score = %d\n",p->name,p->age,p->score);
+	}
 }
 
 

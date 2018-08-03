@@ -87,7 +87,7 @@ void InsertCirLinkList(CirLinkList* list,int pos,void* data)
 void RemoveByPosCirLinkList(CirLinkList* list,int pos)
 {
     //判断参数是否合法
-    if(list == NULL || pos > list->size || pos < -(list->size))
+    if(list == NULL || (list->size == 0) || pos >= list->size || pos < -(list->size))
         return ;
     if(pos<0)
         pos = pos+list->size;
@@ -110,7 +110,7 @@ void RemoveByPosCirLinkList(CirLinkList* list,int pos)
 void RemoveByValCirLinkList(CirLinkList* list,void* data)
 {
     //判断参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0) )
         return ;
 
     //遍历每一个节点
@@ -136,7 +136,7 @@ void RemoveByValCirLinkList(CirLinkList* list,void* data)
 void ChangeByPosCirLinkList(CirLinkList* list,int pos,void* data)
 {
     //判断参数是否合法
-    if(list == NULL || pos > list->size || pos < -(list->size))
+    if(list == NULL || (list->size == 0) || pos >= list->size || pos < -(list->size))
         return ;
     if(pos<0)
         pos = pos+list->size;
@@ -152,7 +152,7 @@ void ChangeByPosCirLinkList(CirLinkList* list,int pos,void* data)
 void ChangeByValCirLinkList(CirLinkList* list,void* srcdata,void* dstdata)
 {
     //判断参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0))
         return ;
    
     LinkNode* pCurrent = list->head->next;
@@ -169,7 +169,7 @@ void ChangeByValCirLinkList(CirLinkList* list,void* srcdata,void* dstdata)
 void* GetItemCirLinkList(CirLinkList* list,int pos)
 {
     //判断参数是否合法
-    if(list == NULL || pos > list->size || pos < -(list->size))
+    if(list == NULL || (list->size == 0) || pos >= list->size || pos < -(list->size))
         return NULL ;
     if(pos<0)
         pos = pos+list->size;
@@ -186,7 +186,7 @@ void* GetItemCirLinkList(CirLinkList* list,int pos)
 int FindByValCirLinkList(CirLinkList* list ,void*data)
 {
     //判断参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0))
         return -1;
 
     //遍历列表
@@ -210,7 +210,7 @@ typedef void(*FUNC)(void*);
 void TraverseCirLinkList(CirLinkList* list, FUNC func)
 {    
     //判断参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0))
         return ;
     
     //遍历每个节点
@@ -259,8 +259,11 @@ typedef struct STUDENT
 
 void PrintStudent(void*data)
 {
-    Student* p = (Student*)data;
-    printf("Name = %s,Age = %d,Score = %d\n",p->name,p->age,p->score);
+    if(data !=NULL)
+    {
+		Student* p = (Student*)data;
+    	printf("Name = %s,Age = %d,Score = %d\n",p->name,p->age,p->score);
+    }
 }
 
 

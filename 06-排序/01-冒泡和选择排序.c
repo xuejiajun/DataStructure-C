@@ -3,7 +3,7 @@
 #include<time.h>//生成随机种子用
 #include<sys/timeb.h>//获取系统运行时间
 
-#define MAX_SIZE 10
+#define MAX_SIZE 10000
 
 //获取系统时间
 time_t GetSystemTime(void)
@@ -76,21 +76,29 @@ void SelectSort(int arr[],int len)
         arr[min] = temp;
     }
 }
+
+
 int main(void)
 {
-    printf("这是排序算法汇总\n");
-    int arr1[MAX_SIZE];
+    printf("这是冒泡排序和选择排序\n");
+    int arr[MAX_SIZE];
     srand((unsigned int)time(NULL));//生成随机种子
     for(int i=0;i<MAX_SIZE;i++)
     {
         int temp = rand() % MAX_SIZE;
-        arr1[i] = temp;
+        arr[i] = temp;
     }
-    PrintArray(arr1,MAX_SIZE);
+
+    PrintArray(arr,MAX_SIZE);
+
+    time_t starttime = GetSystemTime();
+    SelectSort(arr,MAX_SIZE);//120 ms 左右
+    //BubbleEnchceSort(arr,MAX_SIZE);  //300 ms 左右
+    //BubbleSort(arr,MAX_SIZE);
+    time_t endtime = GetSystemTime();
+
+    PrintArray(arr,MAX_SIZE);
     
-    SelectSort(arr1,MAX_SIZE);
-    
-    PrintArray(arr1,MAX_SIZE);
-    
+    printf("排序%d个数据消耗的时间是%ldms\n",MAX_SIZE,endtime - starttime);
     return 0;
 }

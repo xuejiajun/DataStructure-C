@@ -236,6 +236,50 @@ int SizeLinkList(LinkList* list)
     return list->size;
 }
 
+
+//翻转链表,调换指针
+void Reverse1LinkList(LinkList* list)
+{
+    //判断参数是否合法
+    if(list == NULL || list->size == 0)
+        return ;
+    
+    LinkNode* pPre = list->head->next;
+    LinkNode* pCurrent = pPre->next;
+    pPre->next = NULL;
+    list->head->next = NULL;
+    while(pCurrent != NULL)
+    {
+        LinkNode* pNext = pCurrent->next;          
+        pCurrent->next = pPre;
+        pPre = pCurrent;
+        pCurrent = pNext;
+    }
+    //更改头结点指向
+    list->head->next  =  pPre;
+}
+
+
+//翻转链表，将节点分别插入到头结点后，完成翻转
+void Reverse2LinkList(LinkList* list)
+{
+    //判断参数是否合法
+    if(list == NULL || list->size == 0)
+        return ;
+    
+    LinkNode* pPre = list->head->next;
+    LinkNode* pCurrent = pPre->next;
+    while(pCurrent != NULL)
+    {
+        LinkNode* pNext = pCurrent->next;
+        pPre->next = pNext;
+        pCurrent->next = list->head->next;
+        list->head->next  = pCurrent;
+        pCurrent = pNext;
+    }
+}
+
+
 void FreeSpaceLinkList(LinkList* list)
 {
     //判断参数是否合法
@@ -282,7 +326,7 @@ int main(void)
 
     AppendLinkList(list,&s1);
     AppendLinkList(list,&s1);
-#if 0
+#if 1
     AppendLinkList(list,&s2);
     AppendLinkList(list,&s3);
     AppendLinkList(list,&s4);
@@ -312,6 +356,16 @@ int main(void)
     PrintStudent(GetItemLinkList(list,-1));
     
     printf("size = %d\n",SizeLinkList(list));
+   
+    AppendLinkList(list,&s4);
+    AppendLinkList(list,&s5);
+    AppendLinkList(list,&s1);
+    AppendLinkList(list,&s2);
+    TraverseLinkList(list,PrintStudent);
+    printf("链表翻转\n");
+    Reverse2LinkList(list);
+    TraverseLinkList(list,PrintStudent);
+
 
     FreeSpaceLinkList(list);
     return 0;

@@ -105,7 +105,7 @@ void InsertDLinkList(DLinkList* list,int pos,void* data)
 void RemoveByPosDLinkList(DLinkList* list,int pos)
 {
     //判断传入的参数是否合法
-    if(list == NULL || pos>=(list->size) || pos<-(list->size))
+    if(list == NULL || (list->size == 0) || pos>=(list->size) || pos<-(list->size))
         return ;
 
     if(pos<0)
@@ -139,7 +139,7 @@ void RemoveByPosDLinkList(DLinkList* list,int pos)
 void RemoveByValDLinkList(DLinkList* list,void* data)
 {
     //判断传入的参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0))
         return ;
     
     //遍历节点
@@ -167,7 +167,7 @@ void RemoveByValDLinkList(DLinkList* list,void* data)
 void ChangeByPosDLinkList(DLinkList* list,int pos,void* data)
 {
     //判断传入的参数是否合法
-    if(list == NULL || pos>=(list->size) || pos<-(list->size))
+    if(list == NULL || (list->size == 0) || pos>=(list->size) || pos<-(list->size))
         return ;
     
     if(pos<0)
@@ -187,7 +187,7 @@ void ChangeByPosDLinkList(DLinkList* list,int pos,void* data)
 void ChangeByValDLinkList(DLinkList* list,void* srcdata,void* dstdata)
 {
     //判断传入的参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0))
         return ;
 
     //遍历每一个节点
@@ -206,7 +206,7 @@ void ChangeByValDLinkList(DLinkList* list,void* srcdata,void* dstdata)
 void* GetItemDLinkList(DLinkList* list,int pos)
 {
     //判断传入的参数是否合法
-    if(list == NULL || pos>=(list->size) || pos<-(list->size))
+    if(list == NULL || (list->size == 0) || pos>=(list->size) || pos<-(list->size))
         return NULL;
     
     if(pos<0)
@@ -225,7 +225,7 @@ void* GetItemDLinkList(DLinkList* list,int pos)
 int FindByValDLinkList(DLinkList* list,void*data)
 {
     //判断传入的参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0))
         return -1;
     
     //遍历列表查找
@@ -256,7 +256,7 @@ typedef void (*FUNC)(void*);
 void TraverseDLinkList(DLinkList* list,FUNC func)
 {
     //判断传入的参数是否合法
-    if(list == NULL)
+    if(list == NULL || (list->size == 0))
         return ;
    
    //为每一个节点的数据执行func
@@ -300,8 +300,12 @@ typedef struct STUDENT
 
 void PrintStudent(void* data)
 {
-    Student* p = (Student*)data;
-    printf("Name = %s , Age = %d , Score = %d\n",p->name,p->age,p->score);
+	if(data != NULL)
+	{
+		Student* p = (Student*)data;
+    	printf("Name = %s , Age = %d , Score = %d\n",p->name,p->age,p->score);
+	}
+
 }
 
 int main(void)
