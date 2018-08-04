@@ -3,7 +3,7 @@
 #include<time.h>//生成随机种子用
 #include<sys/timeb.h>//获取系统运行时间
 
-#define MAX_SIZE 10000
+#define MAX_SIZE 10
 
 //获取系统时间
 time_t GetSystemTime(void)
@@ -21,9 +21,27 @@ void PrintArray(int arr[],int len)
     printf("\n");
 }
 
-void QuickSort(int arr[],int len)
+void QuickSort(int arr[],int start,int end)
 {
+    //定义左右指针
+    int left = start;
+    int right = end;
+    //选取基准数
+    int base = arr[left];
+    //从右向左找第一个比基准小的数
+    while(arr[right] > base)
+    {
+        right--;
+    }
+    //将右侧的数填到坑中
+    arr[left] = arr[right];
     
+    //左侧指针向右移动一格子
+    left++;
+    //右侧指针不动，左侧指针向右移动，直到第一
+    
+
+
 }
 
 int main(void)
